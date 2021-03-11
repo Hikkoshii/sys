@@ -17,7 +17,7 @@ export default {
   },
   methods:{
     async fetch(){
-      const res = await this.$http.get('/categories')
+      const res = await this.$http.get('categories')
       this.items = res.data
     }
   },
