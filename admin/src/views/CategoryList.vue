@@ -10,9 +10,9 @@
 
 <script>
 export default {
-  date(){
+  data(){
     return{
-      item:[]
+      items:[]
     }
   },
   methods:{
