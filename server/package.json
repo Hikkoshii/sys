@@ -1,7 +1,6 @@
 {
-  "name": "sever",
+  "name": "server",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "serve": "nodemon index.js",
@@ -14,5 +13,7 @@
     "cors": "^2.8.5",
     "express": "^5.0.0-alpha.8",
     "mongoose": "^5.11.19"
-  }
+  },
+  "devDependencies": {},
+  "description": ""
 }
