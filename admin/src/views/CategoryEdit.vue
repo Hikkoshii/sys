@@ -27,12 +27,7 @@ export default {
     },
     methods:{
         async save(){
-            let res
-            if (this.id){
-                res = await this.$http.put(`categories/${this.id}`,this.model) // eslint-disable-line no-unused-vars
-            }else{
-                res = await this.$http.post('categories',this.model) // eslint-disable-line no-unused-vars
-            }
+            const res = await this.$http.post('categories',this.model) // eslint-disable-line no-unused-vars
             this.$router.push('/categories/list')
             this.$message({ 
                 type:'success',
