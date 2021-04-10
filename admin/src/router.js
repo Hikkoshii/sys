@@ -5,6 +5,9 @@ import Main from '../src/views/Main.vue'
 import CategoryEdit from '../src/views/CategoryEdit.vue'
 import CategoryList from '../src/views/CategoryList.vue'
 
+import ItemEdit from '../src/views/ItemEdit.vue'
+import ItemList from '../src/views/ItemList.vue'
+
 
 Vue.use(VueRouter)
 
@@ -17,6 +20,10 @@ const routes = [
       {path:'/categories/create',component:CategoryEdit},
       {path:'/categories/edit/:id',component:CategoryEdit, props:true },
       {path:'/categories/list',component:CategoryList},
+
+      {path:'/items/create',component:ItemEdit},
+      {path:'/items/edit/:id',component:ItemEdit, props:true },
+      {path:'/items/list',component:ItemList},
     ]
   },
   
