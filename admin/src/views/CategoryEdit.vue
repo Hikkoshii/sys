@@ -24,7 +24,13 @@ export default {
     },
     methods:{
         async save(){
-            const res = await this.$http.post('categories',this.model) // eslint-disable-line no-unused-vars
+            let res// eslint-disable-line no-unused-vars
+            if(this.id){
+                const res = await this.$http.put(`categories/${this.id}`,this.model)// eslint-disable-line no-unused-vars
+            }else{
+                const res = await this.$http.post('categories',this.model)// eslint-disable-line no-unused-vars
+            }
+            // const res = await this.$http.post('categories',this.model) // eslint-disable-line no-unused-vars
             this.$router.push('/categories/list')
             this.$message({ 
                 type:'success',
@@ -32,7 +38,7 @@ export default {
             })
         },
         async fetch(){
-            const res = await this.$http.get(`categories/${this.id}`)
+            const res = await this.$http.get(`categories/${this.id}`)// eslint-disable-line no-unused-vars
             this.model = res.data
         }
     },
