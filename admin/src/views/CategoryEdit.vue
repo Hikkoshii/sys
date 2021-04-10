@@ -36,23 +36,23 @@ export default {
         async save(){
             let res// eslint-disable-line no-unused-vars
             if(this.id){
-                const res = await this.$http.put(`categories/${this.id}`,this.model)// eslint-disable-line no-unused-vars
+                const res = await this.$http.put(`rest/categories/${this.id}`,this.model)// eslint-disable-line no-unused-vars
             }else{
-                const res = await this.$http.post('categories',this.model)// eslint-disable-line no-unused-vars
+                const res = await this.$http.post('rest/categories',this.model)// eslint-disable-line no-unused-vars
             }
             // const res = await this.$http.post('categories',this.model) // eslint-disable-line no-unused-vars
-            this.$router.push('/categories/list')
+            this.$router.push('rest/categories/list')
             this.$message({ 
                 type:'success',
                 message:'保存成功'
             })
         },
         async fetch(){
-            const res = await this.$http.get(`categories/${this.id}`)// eslint-disable-line no-unused-vars
+            const res = await this.$http.get(`rest/categories/${this.id}`)// eslint-disable-line no-unused-vars
             this.model = res.data
         },
         async fetchParents(){
-            const res = await this.$http.get(`categories`)// eslint-disable-line no-unused-vars
+            const res = await this.$http.get(`rest/categories`)// eslint-disable-line no-unused-vars
             this.parents = res.data
         }
     },
