@@ -33,13 +33,13 @@ export default {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
-        }).then(async() => {
+        }).then(async () => {
           const res = await this.$http.delete(`categories/${row._id}`);// eslint-disable-line no-unused-vars
           this.$message({
             type: 'success',
-            message: '删除成功!'
+            message: '删除成功!' 
           });
-          this.fetch()         
+          this.fetch();         
         });
     }
   },

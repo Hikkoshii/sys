@@ -15,7 +15,7 @@ module.exports = app => {
     router.delete('/categories/:id',async(req,res) => {
          await Category.findByIdAndDelete(req.params.id,req.body)
          res.send({
-             success : ture
+             success : true
          })
     })
     router.get('/categories',async(req,res) => {
