@@ -1,25 +1,25 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 // import Home from '../views/Home.vue'
-import Main from '../src/views/Main.vue'
-import Login from '../src/views/Login.vue'
-import CategoryEdit from '../src/views/CategoryEdit.vue'
-import CategoryList from '../src/views/CategoryList.vue'
+import Main from './views/Main.vue'
+import Login from './views/Login.vue'
+import CategoryEdit from './views/CategoryEdit.vue'
+import CategoryList from './views/CategoryList.vue'
 
-import ItemEdit from '../src/views/ItemEdit.vue'
-import ItemList from '../src/views/ItemList.vue'
+import ItemEdit from './views/ItemEdit.vue'
+import ItemList from './views/ItemList.vue'
 
-import HeroEdit from '../src/views/HeroEdit.vue'
-import HeroList from '../src/views/HeroList.vue'
+import HeroEdit from './views/HeroEdit.vue'
+import HeroList from './views/HeroList.vue'
 
-import ArticleEdit from '../src/views/ArticleEdit.vue'
-import ArticleList from '../src/views/ArticleList.vue'
+import ArticleEdit from './views/ArticleEdit.vue'
+import ArticleList from './views/ArticleList.vue'
 
-import AdEdit from '../src/views/AdEdit.vue'
-import AdList from '../src/views/AdList.vue'
+import AdEdit from './views/AdEdit.vue'
+import AdList from './views/AdList.vue'
 
-import AdminUserEdit from '../src/views/AdminUserEdit.vue'
-import AdminUserList from '../src/views/AdminUserList.vue'
+import AdminUserEdit from './views/AdminUserEdit.vue'
+import AdminUserList from './views/AdminUserList.vue'
 
 
 Vue.use(Router)

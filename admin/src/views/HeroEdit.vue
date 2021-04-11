@@ -13,7 +13,7 @@
         <el-form-item label="头像">
             <el-upload
             class="avatar-uploader"
-            :action="$http.defaults.baseURL + '/upload'"
+            :action="uploadUrl"
             :show-file-list="false"
             :on-success="afterUpload">
             <img v-if="model.avatar" :src="model.avatar" class="avatar">
