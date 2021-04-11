@@ -2,7 +2,7 @@ const express = require("express")
 
 const app = express()
 
-app.set('secret', 'dsadasasd')
+app.set('secret', 'dsadasasd')//设置拦截器
 
 app.use(require('cors')())
 app.use(express.json())
