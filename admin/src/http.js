@@ -7,14 +7,13 @@ const http = axios.create({
 })
 http.interceptors.request.use(function(config){
     if(localStorage.token){
-        config.headers.Authorization = 'Bearer ' + localStorage.token
+       config.headers.Authorization = 'Bearer ' + localStorage.token
     }
     return config;
 },function(error){
     return Promise.reject(error);
 });
-
-http.interceptors.response.use(res => {
+http.interceptors.response.use(res => {//遇到错误走响应拦截器
     return res
 }, err => {
     if(err.response.data.message){
@@ -22,7 +21,6 @@ http.interceptors.response.use(res => {
             type: 'error',
             message:err.response.data.message
         })
-
         if(err.response.status === 401){
             router.push('/login')
         }

@@ -1,17 +1,15 @@
-// const { model } = require('mongoose')
-// const AdminUser = require('../../models/AdminUser')
+const { model } = require('mongoose')
 
 module.exports = app => {
     const express = require('express')
     const jwt = require('jsonwebtoken')
-    const assert = require('http-assert')
+    const assert = require('http-assert')//安装http-assert 用于判断条件
     const AdminUser = require('../../models/AdminUser')
-
     const router = express.Router({
          mergeParams : true
     })
 //     const Category = require('../../models/Category')
-    //创建资源
+     //创建资源
     router.post('/',async(req,res) => {
          const model = await req.Model.create(req.body)
          res.send(model)
@@ -28,16 +26,8 @@ module.exports = app => {
              success : true
          })
     })
-    //资源列表 
-    router.get('/', async(req , res , next) => {
-         const token = String(req.headers.authorization || '').split(' ').pop()
-         assert(token , 401, '请先登录')
-         const { id } = jwt.verify(token, app.get('secret'))
-         assert(id , 401, '请先登录')
-         req.user = await AdminUser.findById(id)
-         assert(req.user, 401, '请先登录')
-         await next()
-    } ,async(req,res) => {
+    //资源列表
+    router.get('/', async(req,res) => {
      const queryOptions = {}
      if (req.Model.modelName === 'Category'){
           queryOptions.populate = 'parent'
@@ -50,14 +40,16 @@ module.exports = app => {
         const model = await req.Model.findById(req.params.id)
         res.send(model)
    })
-    app.use('/admin/api/rest/:resource',async (req , res , next) => {
-          const modelName = require('inflection').classify(req.params.resource)
-          req.Model = require(`../../models/${modelName}`)
-         next()
-    },router)
+   //登录校验中间件
+   const authMiddleware = require('../../middleware/auth')
+   const resourceMiddleware = require('../../middleware/resource')
+    app.use('/admin/api/rest/:resource', authMiddleware(), resourceMiddleware(),router)
 
     const multer = require('multer')
     const upload = multer({dest:__dirname + '/../../uploads' })
+//把校验功能砍掉了    
+//     app.post('/admin/api/upload', authMiddleware(), upload.single('file'), async (req,res) => {
+    
     app.post('/admin/api/upload', upload.single('file'), async (req,res) => {
      const file = req.file
      file.url = `http://localhost:3000/uploads/${file.filename}`
@@ -84,8 +76,9 @@ module.exports = app => {
     })
 
     //错误处理函数
-    app.use(async(err, req, res, next) => {
-          res.status(err.statusCode || 500).send({
+    app.use(async (err,req,res,next) => {
+     //     console.log(err)
+         res.status(err.statusCode || 500).send({
               message: err.message
          })
     })
