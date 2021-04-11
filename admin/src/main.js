@@ -10,22 +10,6 @@ Vue.config.productionTip = false
 import http from './http'
 Vue.prototype.$http = http
 
-//上传图片的登录校验
-Vue.mixin({
-  computed:{
-    uploadUrl(){
-      return this.$http.defaults.baseURL + '/upload'
-    }
-  },
-  methods:{
-    getAuthHeaders(){
-      return{
-        Authorization: `Bearer $ {localStorage.token || ''}`
-      }
-    }
-  }
-})
-
 new Vue({
   router,
   render: h => h(App)
