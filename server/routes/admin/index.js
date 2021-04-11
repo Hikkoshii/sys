@@ -1,15 +1,16 @@
-const { model } = require('mongoose')
+// const { model } = require('mongoose')
+// const AdminUser = require('../../models/AdminUser')
 
 module.exports = app => {
     const express = require('express')
     const jwt = require('jsonwebtoken')
-    const assert = require('http-assert')//安装http-assert 用于判断条件
     const AdminUser = require('../../models/AdminUser')
+
     const router = express.Router({
          mergeParams : true
     })
 //     const Category = require('../../models/Category')
-     //创建资源
+//创建资源
     router.post('/',async(req,res) => {
          const model = await req.Model.create(req.body)
          res.send(model)
@@ -26,8 +27,14 @@ module.exports = app => {
              success : true
          })
     })
-    //资源列表
-    router.get('/', async(req,res) => {
+    //资源列表 
+    router.get('/', async(req , res , next) => {
+         const token = String(req.headers.authorization || '').split(' ').pop()
+         const { id } = jwt.verify(token, app.get('secret'))
+         req.user = await AdminUser.findById(id)
+         console.log(req.user)
+         await next()
+    } ,async(req,res) => {
      const queryOptions = {}
      if (req.Model.modelName === 'Category'){
           queryOptions.populate = 'parent'
@@ -40,14 +47,15 @@ module.exports = app => {
         const model = await req.Model.findById(req.params.id)
         res.send(model)
    })
-   //登录校验中间件
-   const authMiddleware = require('../../middleware/auth')
-   const resourceMiddleware = require('../../middleware/resource')
-    app.use('/admin/api/rest/:resource', authMiddleware(), resourceMiddleware(),router)
+    app.use('/admin/api/rest/:resource',async (req , res , next) => {
+          const modelName = require('inflection').classify(req.params.resource)
+          req.Model = require(`../../models/${modelName}`)
+         next()
+    },router)
 
     const multer = require('multer')
     const upload = multer({dest:__dirname + '/../../uploads' })
-    app.post('/admin/api/upload', authMiddleware(), upload.single('file'), async (req,res) => {
+    app.post('/admin/api/upload', upload.single('file'), async (req,res) => {
      const file = req.file
      file.url = `http://localhost:3000/uploads/${file.filename}`
      res.send(file)
@@ -59,10 +67,18 @@ module.exports = app => {
          const user = await AdminUser.findOne({
               username: username
          }).select('+password')
-         assert(user, 422, '用户不存在')
+         if (!user){
+              return res.status(422).send({
+                   message:'用户不存在'
+              })
+         }
           //2.校验密码
          const isValid = require('bcrypt').compareSync(password,user.password)
-         assert(isValid, 422, '账号或密码错误')
+         if(!isValid){
+              return res.status(422).send({
+                   message:'账号或密码错误'
+              })
+         }
          //3.返回token  模块：jsonwebtoken 用于加密id和密码
          const token = jwt.sign({
               id: user._id,
@@ -71,13 +87,4 @@ module.exports = app => {
          }, app.get('secret'))
          res.send({token})
     })
-
-    //错误处理函数
-    app.use(async (err,req,res,next) => {
-     //     console.log(err)
-         res.status(err.statusCode || 500).send({
-              message: err.message
-         })
-    })
-
 }
