@@ -24,8 +24,15 @@ export default {
     }
   },
   methods:{
-    login(){
-      console.log(this.model)
+    async login(){
+      const res = await this.$http.post('login', this.model)
+      localStorage.token = res.data.token //关掉浏览器还有
+      // sessionStorage.token = res.data.token //关掉浏览器就没了
+      this.$router.push('/')
+      this.$message({
+        type: 'success',
+        message: '登陆成功'
+      })
     }
   }
 }
