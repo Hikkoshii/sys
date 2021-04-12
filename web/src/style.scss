@@ -93,3 +93,47 @@ $flex-ai:(
 .flex-grow-1{
     flex-grow:1;
 }
+
+//边距  .mt-1 => margin top  0-5  .pb-2
+$spacing-types:(m: margin, p: padding);
+$spacing-directions:(t: top, r: right, b: bottom, l: left);
+$spacing-base-size:1rem;
+$spacing-sizes:(
+    0: 0,
+    1 :0.25,
+    2: 0.5,
+    3: 1,
+    4: 1.5,
+    5: 3
+);
+//m-0, mx-0
+@each $typeKey,$type in $spacing-types {
+    // .m-1
+    @each $sizeKey,$size in $spacing-sizes {
+        //.mt-1 { margin: 0.25rem }
+        .#{$typeKey}-#{$sizeKey}{
+            #{$type}:$size * $spacing-base-size;
+        }
+    } 
+    // .mx-1 , my-1
+    @each $sizeKey,$size in $spacing-sizes {
+        //.mt-1 { margin: 0.25rem }
+        .#{$typeKey}x-#{$sizeKey}{
+            #{$type}-left:$size * $spacing-base-size;
+            #{$type}-right:$size * $spacing-base-size;
+        }
+        .#{$typeKey}y-#{$sizeKey}{
+            #{$type}-top:$size * $spacing-base-size;
+            #{$type}-bottom:$size * $spacing-base-size;
+        }
+    } 
+    // .mt-1
+    @each $directionKey,$direction in $spacing-directions {
+        @each $sizeKey,$size in $spacing-sizes {
+            //.mt-1 { margin: 0.25rem }
+            .#{$typeKey}#{$directionKey}-#{$sizeKey}{
+                #{$type}-#{$direction}:$size * $spacing-base-size;
+            }
+        }       
+    }
+}
