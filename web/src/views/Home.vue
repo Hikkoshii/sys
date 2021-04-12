@@ -13,6 +13,7 @@
     <div class="swiper-pagination pagination-home text-right px-3 pb-2" slot="pagination"></div>
     </swiper>
   <!-- 幻灯片结束 -->
+
     <div class="nav-icons bg-white mt-3 pt-3 text-center text-dark-1">
       <div class="d-flex flex-wrap">
         <div class="nav-item mb-3" v-for="n in 10" :key="n" >
@@ -25,6 +26,10 @@
         <span>收起</span>
         </div>  
     </div>
+  <!-- end of nav icon -->
+
+  <i class="iconfont icon-menu1"></i>
+
   </div>
 </template>
 
