@@ -9,7 +9,9 @@ $colors:(
     "grey":#999,
     "grey-1":#666,
     "light":#f9f9f9,
+    "light-1":#d4d9de,
 );
+$border-color: map-get($colors,'light-1');
 
 //字体大小
 $base-font-size: 1rem;
@@ -20,4 +22,19 @@ $font-sizes:(
     md:1,//13px
     lg:1.0769,//14px
     xl:1.2308,//16px
+);
+
+$flex-jc:(
+    start: flex-start,
+    end: flex-end,
+    center: center,
+    between: space-between,
+    around: space-around,
+);
+
+$flex-ai:(
+    start: flex-start,
+    end: flex-end,
+    center: center,
+    stretch: stretch,
 );
