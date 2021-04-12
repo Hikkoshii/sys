@@ -15,6 +15,9 @@ import 'swiper/swiper-bundle.css'
 
 Vue.use(VueAwesomeSwiper, /* { default options with global component } */)
 
+import Card from './components/Card.vue'
+Vue.component('m-card', Card)
+
 new Vue({
   router,
   render: h => h(App)
