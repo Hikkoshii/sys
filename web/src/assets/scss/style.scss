@@ -43,6 +43,14 @@ a{
     }
 }
 
+//文本溢出
+.text-ellipsis{
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 //宽高度定义
 .w-100{
     width:100%;
