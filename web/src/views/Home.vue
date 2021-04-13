@@ -28,37 +28,16 @@
     </div>
   <!-- end of nav icon -->
 
-  <m-card icon="menu1" title="新闻资讯">
-    <div class="nav jc-between">
-        <div class="nav-item active">
-          <div class="nav-link">热门</div>
-        </div>
-        <div class="nav-item">
-          <div class="nav-link">新闻</div>
-        </div>
-        <div class="nav-item">
-          <div class="nav-link">新闻</div>
-        </div>
-        <div class="nav-item">
-          <div class="nav-link">新闻</div>
-        </div>
-        <div class="nav-item">
-          <div class="nav-link">新闻</div>
-        </div>
+  <m-list-card icon="menu1" title="新闻资讯" :categories="newsCats">
+    <template #items="{category}">
+      <div class="py-2" v-for="(news, i) in category.newsList" :key="i">
+          <span>[{{news.categoryName}}]</span>
+          <span>|</span>
+          <span>{{news.title}}</span>
+          <span>{{news.date}}</span> 
       </div>
-      <div class="pt-3">
-        <swiper>
-        <swiper-slide v-for="m in 5" :key="m">
-          <div class="py-2" v-for="n in 5" :key="n">
-            <span>[新闻]</span>
-            <span>|</span>
-            <span>12331313123131311331</span>
-            <span>06/02</span> 
-          </div>
-        </swiper-slide>
-      </swiper>
-      </div>
-  </m-card>
+    </template>
+  </m-list-card>
 
   <m-card icon="menu1" title="新闻资讯"></m-card>
   <m-card icon="menu1" title="新闻资讯"></m-card>
@@ -78,7 +57,49 @@ export default {
           pagination: {
             el: '.pagination-home'
           },
-        }
+        },
+        newsCats:[
+          {
+            name:"热门",
+            newsList: new Array(5).fill(1).map(v => ({
+                categoryName:'公告',
+                title:'321313131313',
+                date:'06/01'
+              }))
+          },
+          {
+            name:"新闻",
+            newsList: new Array(5).fill(1).map(v => ({
+                categoryName:'公告',
+                title:'321313131313',
+                date:'06/01'
+              }))
+          },
+          {
+            name:"新闻",
+            newsList: new Array(5).fill(1).map(v => ({
+                categoryName:'公告',
+                title:'321313131313',
+                date:'06/01'
+              }))
+          },
+          {
+            name:"新闻",
+            newsList: new Array(5).fill(1).map(v => ({
+                categoryName:'公告',
+                title:'321313131313',
+                date:'06/01'
+              }))
+          },
+          {
+            name:"新闻",
+            newsList: new Array(5).fill(1).map(v => ({
+                categoryName:'公告',
+                title:'321313131313',
+                date:'06/01'
+              }))
+          },
+        ]
       };
   }
 };
