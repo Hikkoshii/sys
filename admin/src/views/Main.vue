@@ -5,14 +5,14 @@
       <el-submenu index="1">
         <template slot="title"><i class="el-icon-message"></i>内容管理</template>
         <el-menu-item-group>
-          <template slot="title">物品</template>
-          <el-menu-item index="/items/create">新建物品</el-menu-item>
-          <el-menu-item index="/items/list">物品列表</el-menu-item>
+          <template slot="title">产品</template>
+          <el-menu-item index="/items/create">新建产品</el-menu-item>
+          <el-menu-item index="/items/list">产品列表</el-menu-item>
         </el-menu-item-group>
         <el-menu-item-group>
-          <template slot="title">英雄</template>
-          <el-menu-item index="/heroes/create">新建英雄</el-menu-item>
-          <el-menu-item index="/heroes/list">英雄列表</el-menu-item>
+          <template slot="title">人物</template>
+          <el-menu-item index="/heroes/create">新建人物</el-menu-item>
+          <el-menu-item index="/heroes/list">人物列表</el-menu-item>
         </el-menu-item-group>
         <el-menu-item-group>
           <template slot="title">文章</template>
@@ -57,7 +57,7 @@
           <el-dropdown-item>删除</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
-      <span>王小虎</span>
+      <span>admin</span>
     </el-header>
     
     <el-main>
@@ -83,7 +83,7 @@
     data() {
       const item = {
         date: '2016-05-02',
-        name: '王小虎',
+        name: 'admin',
         address: '上海市普陀区金沙江路 1518 弄'
       };
       return {
